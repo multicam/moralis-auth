@@ -7,6 +7,7 @@ function User({ user }) {
             <h4>User session:</h4>
             <pre>{JSON.stringify(user, null, 2)}</pre>
             <button onClick={() => signOut({ redirect: "/signin" })}>Sign out</button>
+            <button onClick={() => signOut({ redirect: "/protected" })}>Protected Page</button>
         </div>
     );
 }

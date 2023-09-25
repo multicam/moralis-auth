@@ -1,9 +1,15 @@
 import Head from 'next/head'
 import { Inter } from 'next/font/google'
+import {getSession} from "next-auth/react";
 
 const inter = Inter({ subsets: ['latin'] })
+const { stringify } = JSON
+export async function getServerSideProps(context) {
+    const session = await getSession(context);
+    return { props: { user: session?.user ?? null } };
+}
 
-export default function Home() {
+function Home({user}) {
   return (
     <>
       <Head>
@@ -13,8 +19,9 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={inter.className}>
-        coucou
+          <pre>{user ? stringify(user, null, 2): 'no user'}</pre>
       </main>
     </>
   )
 }
+export default Home

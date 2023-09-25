@@ -16,7 +16,6 @@ const config = createConfig({
 
 function MyApp({ Component, pageProps }) {
   return (
-
       <WagmiConfig config={config}>
         <SessionProvider session={pageProps.session} refetchInterval={0}>
           <Component {...pageProps} />
