@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import { Inter } from 'next/font/google'
 import {getSession} from "next-auth/react";
+import Link from "next/link";
 
 const inter = Inter({ subsets: ['latin'] })
 const { stringify } = JSON
@@ -19,7 +20,7 @@ function Home({user}) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={inter.className}>
-          <pre>{user ? stringify(user, null, 2): 'no user'}</pre>
+          <pre>{user ? <>{stringify(user, null, 2)} -- <Link href='/signin'>signout</Link></> : <>no user -- <Link href='/signin'>signin</Link></>}</pre>
       </main>
     </>
   )

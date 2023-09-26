@@ -4,7 +4,15 @@ const {log} = console, {keys} = Object
 
 export async function getServerSideProps(context) {
     const session = await getSession(context);
-    return { props: { user: session?.user ?? null } };
+    if (!session) {
+        return {
+            redirect: {
+                destination: "/signin",
+                permanent: false,
+            },
+        };
+    }
+    return { props: { user: session.user } };
 }
 
 const ProtectedPage = ({user}) => {
@@ -14,7 +22,7 @@ const ProtectedPage = ({user}) => {
         <div>
             <button onClick={() => push('/user')}>Profile</button>
             <h3>Protected Content</h3>
-            <pre>connected to wallet {address}</pre>
+            <pre>@ connected: {address}</pre>
         </div>
     ): 'no user'
 }
