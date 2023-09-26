@@ -12,6 +12,7 @@ export async function getServerSideProps(context) {
             },
         };
     }
+    // TEST NFTS HERE
     return { props: { user: session.user } };
 }
 
@@ -22,7 +23,7 @@ const ProtectedPage = ({user}) => {
         <div>
             <button onClick={() => push('/user')}>Profile</button>
             <h3>Protected Content</h3>
-            <pre>@ connected: {address}</pre>
+            <pre>{!!address ? <>@ {address}</> : 'not connected'}</pre>
         </div>
     ): 'no user'
 }
